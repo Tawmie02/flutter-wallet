@@ -1,7 +1,11 @@
 // Importing necessary packages and files.
 import 'package:flutter/material.dart'; // Flutter's material design package for UI components.
+import 'package:my_pocket_wallet/screens/account.dart';
+import 'package:my_pocket_wallet/screens/pages/mobile_recharge.dart';
 import 'package:my_pocket_wallet/screens/pages/pay_bill.dart'; // Pay the Bill page.
-import 'package:my_pocket_wallet/screens/pages/transfer.dart'; // Transfer page.
+import 'package:my_pocket_wallet/screens/pages/transfer.dart';
+import 'package:my_pocket_wallet/screens/pages/withdraw.dart'; // Withdraw page.
+import 'package:my_pocket_wallet/screens/pages/send_money_page.dart'; // Send Money Practice Page
 
 // Homecontent widget represents the main screen of the app.
 class Homecontent extends StatelessWidget {
@@ -10,22 +14,16 @@ class Homecontent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          Colors.blue.shade900, // Background color matching the login page.
+      backgroundColor: Colors.blue.shade900, // Background color matching the login page.
       appBar: AppBar(
-        backgroundColor:
-            Colors.blue.shade900, // Deep blue color for the app bar.
+        backgroundColor: Colors.blue.shade900, // Deep blue color for the app bar.
         elevation: 0, // No shadow for the app bar.
-        automaticallyImplyLeading:
-            false, // Removes the back arrow from the app bar.
+        automaticallyImplyLeading: false, // Removes the back arrow from the app bar.
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20.0,
-        ), // Horizontal padding for the body.
+        padding: const EdgeInsets.symmetric(horizontal: 20.0), // Horizontal padding for the body.
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment
-              .start, // Align children to the start of the column.
+          crossAxisAlignment: CrossAxisAlignment.start, // Align children to the start of the column.
           children: [
             _upperText(), // Greeting section.
             _materCardSection(), // Card section.
@@ -45,48 +43,37 @@ class Homecontent extends StatelessWidget {
         crossAxisSpacing: 15, // Spacing between columns.
         mainAxisSpacing: 15, // Spacing between rows.
         children: [
-          // Menu items with icons, labels, and navigation actions.
-          // _buildMenuItem(
-          //   Icons.account_balance_wallet,
-          //   'Account\nand Card',
-          //   () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AccountAndCardPage())),
-          // ),
+          _buildMenuItem(
+            Icons.account_balance_wallet,
+            'Account\nand Card',
+            () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AccountAndCardPage())),
+          ),
+          _buildMenuItem(
+            Icons.send_rounded,
+            'Send\nMoney', // Label for the send money button.
+            () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SendMoneyPage())),
+          
+          ),
           _buildMenuItem(
             Icons.swap_horiz,
             'Transfer',
-            () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const TransferPage()),
-            ),
+            () => Navigator.push(context, MaterialPageRoute(builder: (context) => const TransferPage())),
           ),
-          // _buildMenuItem(
-          //   Icons.attach_money,
-          //   'Withdraw',
-          //   () => Navigator.push(
-          // ),
-          // _buildMenuItem(
-          //   Icons.phone_android,
-          //   'Mobile\nrecharge',
-          //   () => Navigator.push(context, MaterialPageRoute(builder: (context) => const MobileRechargePage())),
-          // ),
+          _buildMenuItem(
+            Icons.attach_money,
+            'Withdraw',
+            () => Navigator.push(context, MaterialPageRoute(builder: (context) => const WithdrawPage())),
+          ),
+          _buildMenuItem(
+            Icons.phone_android,
+            'Mobile\nrecharge',
+            () => Navigator.push(context, MaterialPageRoute(builder: (context) => const MobileRechargePage())),
+          ),
           _buildMenuItem(
             Icons.receipt,
             'Pay the bill',
-            () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const PayTheBillPage()),
-            ),
+            () => Navigator.push(context, MaterialPageRoute(builder: (context) => const PayTheBillPage())),
           ),
-          // _buildMenuItem(
-          //   Icons.credit_card,
-          //   'Credit card',
-          //   () => Navigator.push(context, MaterialPageRoute(builder: (context) => const CreditCardPage())),
-          // ),
-          // _buildMenuItem(
-          //   Icons.insert_chart,
-          //   'Transaction\nreport',
-          //   () => Navigator.push(context, MaterialPageRoute(builder: (context) => const TransactionReportPage())),
-          // ),
         ],
       ),
     );
@@ -97,29 +84,18 @@ class Homecontent extends StatelessWidget {
     return GestureDetector(
       onTap: onTap, // Action to perform when the item is tapped.
       child: Column(
-        mainAxisAlignment:
-            MainAxisAlignment.center, // Center the content vertically.
+        mainAxisAlignment: MainAxisAlignment.center, // Center the content vertically.
         children: [
           CircleAvatar(
             radius: 30,
-            backgroundColor: Colors
-                .blue
-                .shade800, // Background color matching the login page fields.
-            child: Icon(
-              icon,
-              color: Colors.orangeAccent,
-              size: 30,
-            ), // Orange accent icon.
+            backgroundColor: Colors.blue.shade800, // Background color matching the login page fields.
+            child: Icon(icon, color: Colors.orangeAccent, size: 30), // Orange accent icon.
           ),
           const SizedBox(height: 10), // Spacing between icon and label.
           Text(
             label,
             textAlign: TextAlign.center, // Center the text.
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Colors.white70,
-            ),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.white70),
           ),
         ],
       ),
@@ -136,19 +112,11 @@ Widget _upperText() {
       children: [
         Text(
           'Good Morning,',
-          style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
         ),
         Text(
           'Gega!',
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            color: Colors.orangeAccent,
-          ),
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.orangeAccent),
         ),
         SizedBox(height: 20), // Spacing between texts.
       ],
@@ -163,10 +131,7 @@ Widget _materCardSection() {
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(16), // Rounded corners.
       color: Colors.blue.shade800, // Deep blue background (like input fields).
-      border: Border.all(
-        color: Colors.orangeAccent,
-        width: 2,
-      ), // Orange border.
+      border: Border.all(color: Colors.orangeAccent, width: 2), // Orange border.
       boxShadow: [
         BoxShadow(
           color: Colors.black.withOpacity(0.1),
@@ -178,8 +143,7 @@ Widget _materCardSection() {
     child: Padding(
       padding: const EdgeInsets.all(20.0), // Padding inside the container.
       child: Column(
-        crossAxisAlignment:
-            CrossAxisAlignment.start, // Align text to the start.
+        crossAxisAlignment: CrossAxisAlignment.start, // Align text to the start.
         children: [
           const Text(
             'Gega Smith',
@@ -199,12 +163,14 @@ Widget _materCardSection() {
           ),
           const SizedBox(height: 15), // Spacing between sections.
           const Row(
-            mainAxisAlignment:
-                MainAxisAlignment.spaceBetween, // Space between elements.
+            mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between elements.
             children: [
               Text(
                 '4756 •••• •••• 9018',
-                style: TextStyle(color: Colors.white, fontSize: 16),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
               ),
               Text(
                 '\$3,469.52',

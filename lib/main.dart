@@ -4,7 +4,7 @@ import 'package:flutter/material.dart'; // Flutter's material design package for
 import 'package:my_pocket_wallet/classes/homecontent.dart';
 //import 'package:my_pocket_wallet/firebase_options.dart'; // Firebase configuration options.
 import 'package:my_pocket_wallet/screens/splashscreen.dart';
-
+import 'screens/pages/send_money_page.dart';
 
 // The main function is the entry point of the Flutter application.
 void main() async {
